@@ -22,12 +22,16 @@ public class NettyNioServer {
     public void server(int port) throws Exception {
         final ByteBuf buf = Unpooled.unreleasableBuffer(
                 Unpooled.copiedBuffer("Hi!\r\n", Charset.forName("UTF-8")));
-        NioEventLoopGroup group = new NioEventLoopGroup();
+        // 指定 mainReactor , 专门用于接受客户端连接
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        // 指定subReactor , IO线程专门用于处理IO事件
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap b = new ServerBootstrap();//1.创建一个 ServerBootstrap
-            b.group(new NioEventLoopGroup(), new NioEventLoopGroup())//2.使用 NioEventLoopGroup
+            b.group(bossGroup, workerGroup)//2.使用 NioEventLoopGroup
                     .channel(NioServerSocketChannel.class)
                     .localAddress(new InetSocketAddress(port))
+                    .option(ChannelOption.SO_BACKLOG, 100) // 设置TCP参数
                     .childHandler(new ChannelInitializer<SocketChannel>() {//3.指定 ChannelInitializer 将给每个接受的连接调用
                         @Override
                         public void initChannel(SocketChannel ch)
@@ -44,7 +48,10 @@ public class NettyNioServer {
             ChannelFuture f = b.bind().sync();//6.绑定服务器来接受连接
             f.channel().closeFuture().sync();
         } finally {
-            group.shutdownGracefully().sync();//7.释放所有资源
+            //7.释放所有资源
+            bossGroup.shutdownGracefully().sync();
+            workerGroup.shutdownGracefully().sync();
         }
     }
+
 }
