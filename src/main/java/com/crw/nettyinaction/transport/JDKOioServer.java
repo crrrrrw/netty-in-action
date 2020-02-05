@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 /**
  * 使用jdk api实现 OIO网络传输
  */
-public class JdkOioServer {
+public class JDKOioServer {
 
     /**
      * 这种阻塞模式在大连接数的情况就会有很严重的问题，如客户端连接超时，服务器响应严重延迟，性能无法扩展。

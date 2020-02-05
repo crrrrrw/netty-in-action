@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * 使用jdk api实现 NIO网络传输
  */
-public class JdkNioServer {
+public class JDKNioServer {
 
     public void server(int port) throws IOException {
         ServerSocketChannel serverChannel = ServerSocketChannel.open();
