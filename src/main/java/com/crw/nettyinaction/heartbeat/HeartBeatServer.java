@@ -47,7 +47,8 @@ public class HeartBeatServer {
             future.channel().closeFuture().sync();
 
         } finally {
-
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
         }
     }
 }
