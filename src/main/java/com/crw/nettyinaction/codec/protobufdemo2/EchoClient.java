@@ -1,4 +1,4 @@
-package com.crw.nettyinaction.codec;
+package com.crw.nettyinaction.codec.protobufdemo2;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -29,7 +29,7 @@ public class EchoClient {
                         public void initChannel(SocketChannel ch)
                                 throws Exception {
                             ch.pipeline()
-                                    .addLast(new ProtobufDecoder(StudentVO.Student.getDefaultInstance()))
+                                    .addLast(new ProtobufDecoder(DataInfo.BaseMsg.getDefaultInstance()))
                                     .addLast(new ProtobufEncoder())
                                     .addLast(new EchoClientHandler());
                         }

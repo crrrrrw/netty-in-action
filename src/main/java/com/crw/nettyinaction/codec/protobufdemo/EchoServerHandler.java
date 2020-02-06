@@ -1,4 +1,4 @@
-package com.crw.nettyinaction.codec;
+package com.crw.nettyinaction.codec.protobufdemo;
 
 import io.netty.channel.*;
 

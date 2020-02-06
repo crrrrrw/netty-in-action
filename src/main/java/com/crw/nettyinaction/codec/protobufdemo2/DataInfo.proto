@@ -1,0 +1,36 @@
+syntax = "proto3";
+option optimize_for = SPEED; // 加速解析
+option java_package = "com.crw.nettyinaction.codec.protobufdemo2";
+option java_outer_classname = "DataInfo";
+
+// protobuf 可以使用 message 管理其他 message
+message BaseMsg {
+
+    // 定义一个枚举类型
+    enum DataType {
+        STUDENT = 0; // proto3 要求枚举类型从下标0开始
+        TEACHER = 1;
+    }
+
+    // 用 data_type 表示传的是哪个枚举类型, 属性1
+    DataType data_type = 1;
+
+    // 表示每次枚举类型最多只能出现其中的一个，节省空间
+    oneof dataBody {
+        Student student = 2; // 属性2
+        Teacher teacher = 3; // 属性3
+    }
+
+}
+
+message Student {
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+}
+
+message Teacher {
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+}

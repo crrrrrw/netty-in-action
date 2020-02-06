@@ -1,4 +1,4 @@
-package com.crw.nettyinaction.codec;
+package com.crw.nettyinaction.codec.protobufdemo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
