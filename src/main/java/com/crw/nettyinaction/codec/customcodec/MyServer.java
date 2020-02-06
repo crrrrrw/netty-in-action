@@ -30,7 +30,7 @@ public class MyServer {
                                 throws Exception {
                             ch.pipeline()
                                     // 需指定解码类型
-                                    .addLast(new ByteToLongDecoder())
+                                    .addLast(new ByteToLongDecoder2())
                                     .addLast(new LongToByteEncoder())
                                     .addLast(new MyServerHandler());
                         }
