@@ -1,0 +1,8 @@
+syntax = "proto3"; // 版本
+option java_outer_classname = "StudentVO"; // 生产的外部类名
+// protobuf 使用 message 管理数据
+message Student {
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+}
