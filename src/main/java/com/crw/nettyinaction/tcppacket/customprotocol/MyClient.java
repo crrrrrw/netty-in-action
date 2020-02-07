@@ -1,4 +1,4 @@
-package com.crw.nettyinaction.tcppacket;
+package com.crw.nettyinaction.tcppacket.customprotocol;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -27,6 +27,8 @@ public class MyClient {
                         public void initChannel(SocketChannel ch)
                                 throws Exception {
                             ch.pipeline()
+                                    .addLast(new CustomDecoder())
+                                    .addLast(new CustomEncoder())
                                     .addLast(new MyClientHandler());
                         }
                     });

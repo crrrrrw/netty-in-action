@@ -1,4 +1,4 @@
-package com.crw.nettyinaction.tcppacket;
+package com.crw.nettyinaction.tcppacket.problem;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
