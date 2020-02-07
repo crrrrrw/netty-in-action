@@ -6,9 +6,11 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
 
+@Slf4j
 public class MyServer {
 
     private static final int port = 9090;
@@ -37,7 +39,8 @@ public class MyServer {
                     });
 
             ChannelFuture f = b.bind().sync();
-            System.out.println(MyServer.class.getName() + " started and listen on " + f.channel().localAddress());
+            //System.out.println(MyServer.class.getName() + " started and listen on " + f.channel().localAddress());
+            log.info("{} started and listen on {}", MyServer.class.getName(), f.channel().localAddress());
             f.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();
